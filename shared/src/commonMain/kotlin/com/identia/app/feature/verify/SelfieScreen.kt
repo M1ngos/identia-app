@@ -17,6 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.identia.app.core.i18n.LocalStrings
 import com.identia.app.core.theme.BgPure
 import com.identia.app.core.theme.IdentiaTheme
 import com.identia.app.core.theme.Success
@@ -29,8 +30,9 @@ import com.identia.app.ui.components.ViewfinderHint
 
 @Composable
 fun SelfieScreen(onBack: () -> Unit, onCapture: () -> Unit) {
+    val strings = LocalStrings.current
     ScreenScaffold(background = BgPure) {
-        TopBarWithBack("Take a Selfie", onBack, titleColor = Color.White)
+        TopBarWithBack(strings.takeASelfie, onBack, titleColor = Color.White)
         SegmentedProgress(
             total = 4, active = 2,
             modifier = Modifier.padding(horizontal = 22.dp).padding(bottom = 12.dp),
@@ -46,7 +48,7 @@ fun SelfieScreen(onBack: () -> Unit, onCapture: () -> Unit) {
         ) {
             FaceOvalGuide(width = 170.dp, height = 215.dp, color = IdentiaTheme.colors.primary.copy(alpha = 0.55f))
             ViewfinderHint(
-                "Center your face in the oval",
+                strings.centerYourFace,
                 modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth().padding(bottom = 18.dp),
             )
         }
@@ -56,7 +58,7 @@ fun SelfieScreen(onBack: () -> Unit, onCapture: () -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Box(Modifier.size(7.dp).clip(CircleShape).background(Success))
-            Text("Good lighting detected", style = IdentiaTheme.type.mono, color = Success)
+            Text(strings.goodLightingDetected, style = IdentiaTheme.type.mono, color = Success)
         }
         Box(Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 24.dp), contentAlignment = Alignment.Center) {
             ShutterButton(onClick = onCapture)

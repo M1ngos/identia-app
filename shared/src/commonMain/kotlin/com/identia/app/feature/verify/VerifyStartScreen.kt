@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.identia.app.core.i18n.LocalStrings
 import com.identia.app.core.theme.Card
 import com.identia.app.core.theme.IdentiaTheme
 import com.identia.app.ui.components.InfoPill
@@ -27,8 +28,9 @@ import com.identia.app.ui.components.TopBarWithBack
 
 @Composable
 fun VerifyStartScreen(onBack: () -> Unit, onStart: () -> Unit) {
+    val strings = LocalStrings.current
     ScreenScaffold {
-        TopBarWithBack("Verify Identity", onBack)
+        TopBarWithBack(strings.verifyIdentity, onBack)
         Column(
             Modifier.fillMaxSize().padding(horizontal = 24.dp),
         ) {
@@ -44,26 +46,26 @@ fun VerifyStartScreen(onBack: () -> Unit, onStart: () -> Unit) {
             }
             Spacer(Modifier.height(20.dp))
             Text(
-                "Let's confirm it's really you",
+                strings.confirmItsYou,
                 style = IdentiaTheme.type.headingMd,
                 color = IdentiaTheme.colors.textPrimary,
             )
             Spacer(Modifier.height(10.dp))
             Text(
-                "A quick three-step check. Have your government ID ready and find good lighting.",
+                strings.confirmItsYouSubtitle,
                 style = IdentiaTheme.type.body,
                 color = IdentiaTheme.colors.textSecondaryAlt,
             )
             Spacer(Modifier.height(24.dp))
-            StepRow(1, "Scan your ID document")
+            StepRow(1, strings.stepScanId)
             Spacer(Modifier.height(12.dp))
-            StepRow(2, "Take a quick selfie")
+            StepRow(2, strings.stepTakeSelfie)
             Spacer(Modifier.height(12.dp))
-            StepRow(3, "Pass the liveness check")
+            StepRow(3, strings.stepLiveness)
             Spacer(Modifier.weight(1f))
-            InfoPill("≈ 60 seconds · secure")
+            InfoPill(strings.secureDuration)
             Spacer(Modifier.height(14.dp))
-            PrimaryButton("Start Verification", onClick = onStart)
+            PrimaryButton(strings.startVerification, onClick = onStart)
             Spacer(Modifier.height(22.dp))
         }
     }

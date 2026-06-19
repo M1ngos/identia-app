@@ -32,6 +32,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
+import com.identia.app.core.i18n.LocalStrings
 import com.identia.app.core.theme.BgPure
 import com.identia.app.core.theme.Card
 import com.identia.app.core.theme.IdentiaTheme
@@ -42,6 +43,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun FaceScanningScreen(onComplete: () -> Unit) {
+    val strings = LocalStrings.current
     LaunchedEffect(Unit) {
         delay(2200)
         onComplete()
@@ -49,7 +51,7 @@ fun FaceScanningScreen(onComplete: () -> Unit) {
     ScreenScaffold(background = BgPure) {
         // Header (no back affordance during scan)
         Text(
-            "Scanning Face",
+            strings.scanningFace,
             style = IdentiaTheme.type.titleSm,
             color = Color.White,
             modifier = Modifier.padding(start = 18.dp + 34.dp, top = 8.dp, bottom = 12.dp),
@@ -67,7 +69,7 @@ fun FaceScanningScreen(onComplete: () -> Unit) {
             ScanFace()
             Spacer(Modifier.height(22.dp))
             Text(
-                "ANALYZING 1,024 DATA POINTS…",
+                strings.analyzingDataPoints,
                 style = IdentiaTheme.type.monoLabel.copy(letterSpacing = 0.08.em),
                 color = IdentiaTheme.colors.accentSoft,
                 modifier = Modifier.pulse(0.45f, 1f, 1400),
@@ -85,7 +87,7 @@ fun FaceScanningScreen(onComplete: () -> Unit) {
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Box(Modifier.size(8.dp).clip(CircleShape).background(IdentiaTheme.colors.primary).pulse(0.3f, 1f, 1000))
-                Text("Hold still…", style = IdentiaTheme.type.bodyStrong, color = IdentiaTheme.colors.textSecondaryAlt)
+                Text(strings.holdStill, style = IdentiaTheme.type.bodyStrong, color = IdentiaTheme.colors.textSecondaryAlt)
             }
         }
     }

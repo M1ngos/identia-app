@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.identia.app.core.i18n.LocalStrings
 import com.identia.app.core.theme.BgPure
 import com.identia.app.core.theme.Card
 import com.identia.app.core.theme.IdentiaTheme
@@ -50,6 +51,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun LivenessScreen(onBack: () -> Unit, onComplete: (failed: Boolean) -> Unit) {
     val demo = LocalDemoState.current
+    val strings = LocalStrings.current
     var step by remember { mutableStateOf(0) }
 
     LaunchedEffect(Unit) {
@@ -61,7 +63,7 @@ fun LivenessScreen(onBack: () -> Unit, onComplete: (failed: Boolean) -> Unit) {
     }
 
     ScreenScaffold(background = BgPure) {
-        TopBarWithBack("Liveness Check", onBack, titleColor = Color.White)
+        TopBarWithBack(strings.livenessCheck, onBack, titleColor = Color.White)
         SegmentedProgress(
             total = 4, active = 3,
             modifier = Modifier.padding(horizontal = 22.dp).padding(bottom = 12.dp),
@@ -78,7 +80,7 @@ fun LivenessScreen(onBack: () -> Unit, onComplete: (failed: Boolean) -> Unit) {
             }
             Spacer(Modifier.height(12.dp))
             Text(
-                "Slowly turn your head →",
+                strings.turnYourHead,
                 style = IdentiaTheme.type.title,
                 color = IdentiaTheme.colors.textPrimary,
                 modifier = Modifier.pulse(0.5f, 1f, 1600),
@@ -86,16 +88,16 @@ fun LivenessScreen(onBack: () -> Unit, onComplete: (failed: Boolean) -> Unit) {
             )
             Spacer(Modifier.height(6.dp))
             Text(
-                "Keep your face inside the circle",
+                strings.keepFaceInsideCircle,
                 style = IdentiaTheme.type.body,
                 color = IdentiaTheme.colors.textSecondaryAlt,
             )
             Spacer(Modifier.height(26.dp))
-            CheckItem("Blink detected", done = step >= 1)
+            CheckItem(strings.blinkDetected, done = step >= 1)
             Spacer(Modifier.height(10.dp))
-            CheckItem("Smile detected", done = step >= 2)
+            CheckItem(strings.smileDetected, done = step >= 2)
             Spacer(Modifier.height(10.dp))
-            CheckItem(if (step >= 3) "Turn head detected" else "Turn head — in progress", done = step >= 3)
+            CheckItem(if (step >= 3) strings.turnHeadDetected else strings.turnHeadInProgress, done = step >= 3)
         }
         Spacer(Modifier.height(24.dp))
     }

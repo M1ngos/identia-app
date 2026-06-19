@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
+import com.identia.app.core.i18n.Language
 
 /** A single audit-log entry. */
 data class AuditEntry(
@@ -34,6 +35,9 @@ class DemoState {
     var darkMode by mutableStateOf(true)
     var biometricUnlock by mutableStateOf(true)
     var simulateFailure by mutableStateOf(false)
+
+    /** Selected interface language; drives the strings provided via LocalStrings. */
+    var language by mutableStateOf(Language.English)
 
     /** Clear the session — called from the Log Out action. */
     fun logOut() {

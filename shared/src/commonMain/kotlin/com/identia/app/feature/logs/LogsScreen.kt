@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.identia.app.core.i18n.LocalStrings
 import com.identia.app.core.theme.Bg
 import com.identia.app.core.theme.Card
 import com.identia.app.core.theme.IdentiaTheme
@@ -42,6 +43,7 @@ private enum class Filter { All, Success, Failed, Date }
 @Composable
 fun LogsScreen() {
     val demo = LocalDemoState.current
+    val strings = LocalStrings.current
     var filter by remember { mutableStateOf(Filter.All) }
 
     fun keep(e: AuditEntry) = when (filter) {
@@ -54,7 +56,7 @@ fun LogsScreen() {
 
     ScreenScaffold {
         Text(
-            "Audit Log",
+            strings.auditLog,
             style = IdentiaTheme.type.title,
             color = IdentiaTheme.colors.textPrimary,
             modifier = Modifier.padding(start = 20.dp, end = 20.dp, top = 8.dp, bottom = 10.dp),
@@ -63,17 +65,17 @@ fun LogsScreen() {
             Modifier.fillMaxWidth().padding(horizontal = 20.dp).padding(bottom = 12.dp),
             horizontalArrangement = Arrangement.spacedBy(7.dp),
         ) {
-            Chip("All", filter == Filter.All) { filter = Filter.All }
-            Chip("Success", filter == Filter.Success) { filter = Filter.Success }
-            Chip("Failed", filter == Filter.Failed) { filter = Filter.Failed }
-            Chip("Date", filter == Filter.Date) { filter = Filter.Date }
+            Chip(strings.filterAll, filter == Filter.All) { filter = Filter.All }
+            Chip(strings.filterSuccess, filter == Filter.Success) { filter = Filter.Success }
+            Chip(strings.filterFailed, filter == Filter.Failed) { filter = Filter.Failed }
+            Chip(strings.filterDate, filter == Filter.Date) { filter = Filter.Date }
         }
         Box(Modifier.fillMaxWidth().padding(horizontal = 20.dp).verticalScroll(rememberScrollState())) {
             // Timeline rail
             Box(Modifier.padding(start = 9.dp).width(2.dp).fillMaxHeight().background(IdentiaTheme.colors.border))
             Column(Modifier.fillMaxWidth().padding(bottom = 12.dp)) {
                 if (today.isNotEmpty()) {
-                    DayHeader("Today")
+                    DayHeader(strings.today)
                     today.forEach { TimelineEntry(it) }
                 }
                 if (jun10.isNotEmpty()) {

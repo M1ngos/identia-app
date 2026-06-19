@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.identia.app.core.theme.Bg
 import com.identia.app.core.theme.Border
+import com.identia.app.core.i18n.LocalStrings
 import com.identia.app.core.theme.IdentiaTheme
 import com.identia.app.navigation.Tab
 
@@ -58,6 +59,13 @@ fun BottomNav(selected: Tab?, onSelect: (Tab) -> Unit) {
 
 @Composable
 private fun NavItem(tab: Tab, active: Boolean, onClick: () -> Unit) {
+    val strings = LocalStrings.current
+    val label = when (tab) {
+        Tab.Home -> strings.tabHome
+        Tab.Verify -> strings.tabVerify
+        Tab.Face -> strings.tabFace
+        Tab.Logs -> strings.tabLogs
+    }
     val color = if (active) IdentiaTheme.colors.primary else IdentiaTheme.colors.textInactive
     Column(
         modifier = Modifier
@@ -73,7 +81,7 @@ private fun NavItem(tab: Tab, active: Boolean, onClick: () -> Unit) {
         Box(Modifier.size(18.dp), contentAlignment = Alignment.Center) {
             NavGlyph(tab, color)
         }
-        Text(tab.label, style = IdentiaTheme.type.navLabel, color = color)
+        Text(label, style = IdentiaTheme.type.navLabel, color = color)
     }
 }
 

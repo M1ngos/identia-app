@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.identia.app.core.i18n.LocalStrings
 import com.identia.app.core.theme.BgPure
 import com.identia.app.core.theme.IdentiaTheme
 import com.identia.app.ui.components.Chip
@@ -29,8 +30,9 @@ import com.identia.app.ui.components.ScreenScaffold
 
 @Composable
 fun CaptureIdScreen(front: Boolean, onBack: () -> Unit, onCapture: () -> Unit) {
+    val strings = LocalStrings.current
     ScreenScaffold(background = BgPure) {
-        TopBarWithBack(if (front) "Scan ID — Front" else "Scan ID — Back", onBack, titleColor = Color.White)
+        TopBarWithBack(if (front) strings.scanIdFront else strings.scanIdBack, onBack, titleColor = Color.White)
         SegmentedProgress(
             total = 4, active = 1,
             modifier = Modifier.padding(horizontal = 22.dp).padding(bottom = 12.dp),
@@ -45,7 +47,7 @@ fun CaptureIdScreen(front: Boolean, onBack: () -> Unit, onCapture: () -> Unit) {
         ) {
             ViewfinderFrame(accent = IdentiaTheme.colors.primary)
             ViewfinderHint(
-                "Align front of ID within frame",
+                strings.alignFrontOfId,
                 modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth().padding(bottom = 18.dp),
             )
         }
@@ -53,8 +55,8 @@ fun CaptureIdScreen(front: Boolean, onBack: () -> Unit, onCapture: () -> Unit) {
             Modifier.fillMaxWidth().padding(top = 14.dp, bottom = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally),
         ) {
-            Chip("Front", selected = front, onClick = {})
-            Chip("Back", selected = !front, onClick = {})
+            Chip(strings.front, selected = front, onClick = {})
+            Chip(strings.back, selected = !front, onClick = {})
         }
         Box(Modifier.fillMaxWidth().padding(top = 6.dp, bottom = 24.dp), contentAlignment = Alignment.Center) {
             ShutterButton(onClick = onCapture)

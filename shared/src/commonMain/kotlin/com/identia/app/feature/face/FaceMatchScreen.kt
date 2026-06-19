@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.identia.app.core.i18n.LocalStrings
 import com.identia.app.core.theme.Bg
 import com.identia.app.core.theme.IdentiaTheme
 import com.identia.app.core.theme.Success
@@ -33,6 +34,7 @@ import com.identia.app.ui.components.ScreenScaffold
 
 @Composable
 fun FaceMatchScreen(confidence: Float, onContinue: () -> Unit) {
+    val strings = LocalStrings.current
     val bg = Brush.verticalGradient(listOf(Color(0xFF0F1D18), Bg))
     ScreenScaffold(brush = bg) {
         Column(
@@ -49,21 +51,21 @@ fun FaceMatchScreen(confidence: Float, onContinue: () -> Unit) {
                 contentAlignment = Alignment.Center,
             ) { CheckIcon(size = 30.dp, color = Success, strokeWidth = 3.5.dp) }
             Spacer(Modifier.height(18.dp))
-            Text("Match Confirmed", style = IdentiaTheme.type.headingMd, color = IdentiaTheme.colors.textPrimary)
+            Text(strings.matchConfirmed, style = IdentiaTheme.type.headingMd, color = IdentiaTheme.colors.textPrimary)
             Spacer(Modifier.height(7.dp))
-            Text("Welcome back, Alex.", style = IdentiaTheme.type.body, color = IdentiaTheme.colors.textSecondaryAlt, textAlign = TextAlign.Center)
+            Text(strings.welcomeBackName, style = IdentiaTheme.type.body, color = IdentiaTheme.colors.textSecondaryAlt, textAlign = TextAlign.Center)
             Spacer(Modifier.height(24.dp))
             ConfidenceRing(percent = confidence, size = 148.dp)
             Spacer(Modifier.height(16.dp))
             DividedCard(Modifier.fillMaxWidth()) {
-                DetailRow("Threshold", "85.0%")
+                DetailRow(strings.fieldThreshold, "85.0%")
                 RowDivider()
-                DetailRow("Liveness", "Passed", valueColor = Success)
+                DetailRow(strings.fieldLiveness, strings.passed, valueColor = Success)
                 RowDivider()
-                DetailRow("Latency", "412 ms")
+                DetailRow(strings.fieldLatency, "412 ms")
             }
             Spacer(Modifier.weight(1f))
-            PrimaryButton("Continue", onClick = onContinue)
+            PrimaryButton(strings.continueAction, onClick = onContinue)
             Spacer(Modifier.height(22.dp))
         }
     }

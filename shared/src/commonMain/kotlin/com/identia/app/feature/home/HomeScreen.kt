@@ -25,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.identia.app.core.i18n.LocalStrings
 import com.identia.app.core.theme.Border
 import com.identia.app.core.theme.Card
 import com.identia.app.core.theme.Gradients
@@ -39,6 +40,7 @@ import com.identia.app.ui.components.StatusBanner
 @Composable
 fun HomeScreen(onModule: (Tab) -> Unit, onSettings: () -> Unit) {
     val demo = LocalDemoState.current
+    val strings = LocalStrings.current
     ScreenScaffold {
         Column(
             Modifier
@@ -54,29 +56,29 @@ fun HomeScreen(onModule: (Tab) -> Unit, onSettings: () -> Unit) {
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Column {
-                    Text("Welcome back", style = IdentiaTheme.type.body, color = IdentiaTheme.colors.textSecondaryAlt)
+                    Text(strings.welcomeBack, style = IdentiaTheme.type.body, color = IdentiaTheme.colors.textSecondaryAlt)
                     Text(demo.userName, style = IdentiaTheme.type.title.copy(fontSize = 21.sp), color = IdentiaTheme.colors.textPrimary)
                 }
                 Avatar(demo.initials, size = 42.dp)
             }
             Spacer(Modifier.height(18.dp))
             StatusBanner(
-                title = "Identity Verified",
-                subtitle = "Trust score ${demo.trustScore} · valid",
+                title = strings.identityVerified,
+                subtitle = strings.trustScoreValid(demo.trustScore),
                 modifier = Modifier.fillMaxWidth(),
             )
             Spacer(Modifier.height(18.dp))
-            SectionLabel("Modules")
+            SectionLabel(strings.modules)
             Spacer(Modifier.height(10.dp))
 
             // 2-col grid
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(11.dp)) {
-                ModuleCard(Modifier.weight(1f), "Identity\nVerification") { onModule(Tab.Verify) }
-                ModuleCard(Modifier.weight(1f), "Face\nAuthentication", icon = ModuleIcon.Circle) { onModule(Tab.Face) }
+                ModuleCard(Modifier.weight(1f), strings.moduleIdentityVerification) { onModule(Tab.Verify) }
+                ModuleCard(Modifier.weight(1f), strings.moduleFaceAuthentication, icon = ModuleIcon.Circle) { onModule(Tab.Face) }
             }
             Spacer(Modifier.height(11.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(11.dp)) {
-                ModuleCard(Modifier.weight(1f), "Logs / Audit", icon = ModuleIcon.Lines) { onModule(Tab.Logs) }
+                ModuleCard(Modifier.weight(1f), strings.moduleLogsAudit, icon = ModuleIcon.Lines) { onModule(Tab.Logs) }
             }
             Spacer(Modifier.height(11.dp))
             SettingsCard(onClick = onSettings)
@@ -156,6 +158,6 @@ private fun SettingsCard(onClick: () -> Unit) {
         horizontalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         RingGlyph(size = 28.dp, color = IdentiaTheme.colors.primary, strokeWidth = 2.dp)
-        Text("Settings", style = IdentiaTheme.type.bodySemi.copy(fontSize = 13.sp), color = IdentiaTheme.colors.textPrimary)
+        Text(LocalStrings.current.settings, style = IdentiaTheme.type.bodySemi.copy(fontSize = 13.sp), color = IdentiaTheme.colors.textPrimary)
     }
 }

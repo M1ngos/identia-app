@@ -37,6 +37,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.identia.app.core.i18n.LocalStrings
 import com.identia.app.core.theme.Bg
 import com.identia.app.core.theme.CardInput
 import com.identia.app.core.theme.IdentiaTheme
@@ -61,6 +62,7 @@ private const val CODE_LENGTH = 6
 @Composable
 fun AuthEntryScreen(onEnter: () -> Unit) {
     val demo = LocalDemoState.current
+    val strings = LocalStrings.current
     val scope = rememberCoroutineScope()
     val focusRequester = remember { FocusRequester() }
     val keyboard = LocalSoftwareKeyboardController.current
@@ -125,7 +127,7 @@ fun AuthEntryScreen(onEnter: () -> Unit) {
                 Text("IdentIA", style = IdentiaTheme.type.brand, color = IdentiaTheme.colors.textPrimary)
                 Spacer(Modifier.height(8.dp))
                 Text(
-                    "VERIFY · AUTHENTICATE · TRUST",
+                    strings.tagline,
                     style = IdentiaTheme.type.monoTag,
                     color = IdentiaTheme.colors.primary,
                 )
@@ -134,7 +136,7 @@ fun AuthEntryScreen(onEnter: () -> Unit) {
                 Spacer(Modifier.height(34.dp))
 
                 Text(
-                    "ENTER ACCESS CODE",
+                    strings.enterAccessCode,
                     style = IdentiaTheme.type.monoSm,
                     color = IdentiaTheme.colors.textMuted,
                 )
@@ -183,7 +185,7 @@ fun AuthEntryScreen(onEnter: () -> Unit) {
                 // Status line: error message or alpha hint.
                 if (isError) {
                     Text(
-                        "Invalid code. Try again.",
+                        strings.invalidCode,
                         style = IdentiaTheme.type.mono,
                         color = IdentiaTheme.colors.error,
                         textAlign = TextAlign.Center,
@@ -199,7 +201,7 @@ fun AuthEntryScreen(onEnter: () -> Unit) {
 
                 Spacer(Modifier.height(22.dp))
                 PrimaryButton(
-                    text = if (isVerifying) "Verifying…" else "Verify",
+                    text = if (isVerifying) strings.verifying else strings.verify,
                     onClick = {
                         if (value.text.length == CODE_LENGTH) verify()
                     },
@@ -209,7 +211,7 @@ fun AuthEntryScreen(onEnter: () -> Unit) {
                 )
             }
             Text(
-                "END-TO-END ENCRYPTED · ${DemoState.IDENTIA_APP_VERSION}",
+                strings.endToEndEncrypted(DemoState.IDENTIA_APP_VERSION),
                 style = IdentiaTheme.type.monoSm.copy(letterSpacing = androidx.compose.ui.unit.TextUnit.Unspecified),
                 color = IdentiaTheme.colors.textMutedAlt,
                 textAlign = TextAlign.Center,

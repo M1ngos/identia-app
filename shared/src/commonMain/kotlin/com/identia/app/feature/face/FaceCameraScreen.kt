@@ -15,6 +15,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.identia.app.core.i18n.LocalStrings
 import com.identia.app.core.theme.BgPure
 import com.identia.app.core.theme.IdentiaTheme
 import com.identia.app.ui.components.CornerBrackets
@@ -26,8 +27,9 @@ import com.identia.app.ui.components.ViewfinderHint
 
 @Composable
 fun FaceCameraScreen(onBack: () -> Unit, onScan: () -> Unit) {
+    val strings = LocalStrings.current
     ScreenScaffold(background = BgPure) {
-        TopBarWithBack("Face Authentication", onBack, titleColor = Color.White)
+        TopBarWithBack(strings.faceAuthentication, onBack, titleColor = Color.White)
         Box(
             Modifier
                 .weight(1f)
@@ -40,12 +42,12 @@ fun FaceCameraScreen(onBack: () -> Unit, onScan: () -> Unit) {
             CornerBrackets(color = Color.White.copy(alpha = 0.35f))
             FaceOvalGuide(width = 170.dp, height = 210.dp, color = IdentiaTheme.colors.primary.copy(alpha = 0.5f))
             ViewfinderHint(
-                "Position your face to begin",
+                strings.positionYourFace,
                 modifier = Modifier.align(Alignment.BottomCenter).fillMaxWidth().padding(bottom = 20.dp),
             )
         }
         PrimaryButton(
-            "Scan Face",
+            strings.scanFace,
             onClick = onScan,
             modifier = Modifier.padding(horizontal = 24.dp).padding(top = 18.dp, bottom = 26.dp),
         ) {
