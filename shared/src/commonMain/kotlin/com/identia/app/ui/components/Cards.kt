@@ -114,20 +114,3 @@ fun InfoPill(text: String, modifier: Modifier = Modifier) {
         Text(text, style = IdentiaTheme.type.mono, color = IdentiaTheme.colors.textSecondaryAlt)
     }
 }
-
-/** Stat tile used on the Profile screen. */
-@Composable
-fun StatCard(value: String, label: String, valueColor: Color, modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier
-            .clip(RoundedCornerShape(14.dp))
-            .background(Card)
-            .border(1.dp, Border, RoundedCornerShape(14.dp))
-            .padding(vertical = 13.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(2.dp),
-    ) {
-        Text(value, style = IdentiaTheme.type.statNumber, color = valueColor)
-        Text(label.uppercase(), style = IdentiaTheme.type.navLabel.copy(letterSpacing = androidx.compose.ui.unit.TextUnit.Unspecified), color = IdentiaTheme.colors.textSecondaryAlt)
-    }
-}

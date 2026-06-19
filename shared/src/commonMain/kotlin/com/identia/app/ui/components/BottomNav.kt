@@ -91,6 +91,5 @@ private fun NavGlyph(tab: Tab, color: Color) {
         ) {
             repeat(3) { Box(Modifier.fillMaxWidth().height(2.dp).clip(RoundedCornerShape(2.dp)).background(color)) }
         }
-        Tab.Profile -> Box(Modifier.size(15.dp).clip(CircleShape).background(color))
     }
 }

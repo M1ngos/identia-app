@@ -76,7 +76,6 @@ fun HomeScreen(onModule: (Tab) -> Unit, onSettings: () -> Unit) {
             }
             Spacer(Modifier.height(11.dp))
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(11.dp)) {
-                ModuleCard(Modifier.weight(1f), "Profile", icon = ModuleIcon.FilledCircle) { onModule(Tab.Profile) }
                 ModuleCard(Modifier.weight(1f), "Logs / Audit", icon = ModuleIcon.Lines) { onModule(Tab.Logs) }
             }
             Spacer(Modifier.height(11.dp))

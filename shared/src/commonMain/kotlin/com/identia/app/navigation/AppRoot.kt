@@ -21,7 +21,6 @@ import com.identia.app.feature.face.FaceMatchScreen
 import com.identia.app.feature.face.FaceScanningScreen
 import com.identia.app.feature.home.HomeScreen
 import com.identia.app.feature.logs.LogsScreen
-import com.identia.app.feature.profile.ProfileScreen
 import com.identia.app.feature.settings.SettingsScreen
 import com.identia.app.feature.verify.CaptureIdScreen
 import com.identia.app.feature.verify.LivenessScreen
@@ -42,7 +41,6 @@ fun AppRoot() {
     val selectedTab = when {
         dest?.hasRoute(HomeRoute::class) == true -> Tab.Home
         dest?.hasRoute(LogsRoute::class) == true -> Tab.Logs
-        dest?.hasRoute(ProfileRoute::class) == true -> Tab.Profile
         else -> null
     }
     val showBottomBar = selectedTab != null
@@ -60,7 +58,6 @@ fun AppRoot() {
             Tab.Verify -> VerifyStartRoute
             Tab.Face -> FaceCameraRoute
             Tab.Logs -> LogsRoute
-            Tab.Profile -> ProfileRoute
         }
         nav.navigate(route) {
             popUpTo(nav.graph.findStartDestination().id) { saveState = true }
@@ -84,9 +81,9 @@ fun AppRoot() {
         }
         Column(modifier = contentModifier) {
             // Persistent alpha strip on the authenticated tab screens.
-            if (showBottomBar) {
-                AlphaStrip()
-            }
+//            if (showBottomBar) {
+//                AlphaStrip()
+//            }
             NavHost(
                 navController = nav,
                 startDestination = AuthRoute,
@@ -107,7 +104,6 @@ fun AppRoot() {
                     onSettings = { nav.navigate(SettingsRoute) },
                 )
             }
-            composable<ProfileRoute> { ProfileScreen(onLogout = ::logout) }
             composable<LogsRoute> { LogsScreen() }
             composable<SettingsRoute> {
                 SettingsScreen(onBack = { nav.popBackStack() }, onLogout = ::logout)

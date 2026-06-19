@@ -17,13 +17,6 @@ data class AuditEntry(
     enum class Status { Ok, Fail }
 }
 
-/** A recent check shown on the Profile screen. */
-data class RecentCheck(
-    val title: String,
-    val subtitle: String,
-    val ok: Boolean,
-)
-
 /**
  * Lightweight in-memory demo state. Holds the sample data shown across screens
  * plus the toggles surfaced on Settings (the "Simulate failure" switch drives
@@ -48,15 +41,11 @@ class DemoState {
     }
 
     companion object {
+        const val IDENTIA_APP_VERSION: String = "v0.1.7-alpha"
+
         /** Demo-only access code. Alpha build: the only way in. */
         const val DEMO_ACCESS_CODE = "123456"
     }
-
-    val recentChecks = listOf(
-        RecentCheck("Face Authentication", "Today · 99.2%", ok = true),
-        RecentCheck("Identity Verification", "Jun 12 · passed", ok = true),
-        RecentCheck("Face Authentication", "Jun 10 · 61% (failed)", ok = false),
-    )
 
     val auditToday = listOf(
         AuditEntry("Face auth · ok", "conf 99.2% · 412ms", "09:41", AuditEntry.Status.Ok),

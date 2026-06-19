@@ -189,12 +189,12 @@ fun AuthEntryScreen(onEnter: () -> Unit) {
                         textAlign = TextAlign.Center,
                     )
                 } else {
-                    Text(
-                        "Alpha access code: ${DemoState.DEMO_ACCESS_CODE}",
-                        style = IdentiaTheme.type.mono,
-                        color = IdentiaTheme.colors.textMutedAlt,
-                        textAlign = TextAlign.Center,
-                    )
+//                    Text(
+//                        "Alpha access code: ${DemoState.DEMO_ACCESS_CODE}",
+//                        style = IdentiaTheme.type.mono,
+//                        color = IdentiaTheme.colors.textMutedAlt,
+//                        textAlign = TextAlign.Center,
+//                    )
                 }
 
                 Spacer(Modifier.height(22.dp))
@@ -209,7 +209,7 @@ fun AuthEntryScreen(onEnter: () -> Unit) {
                 )
             }
             Text(
-                "END-TO-END ENCRYPTED · v2.4.0-demo",
+                "END-TO-END ENCRYPTED · ${DemoState.IDENTIA_APP_VERSION}",
                 style = IdentiaTheme.type.monoSm.copy(letterSpacing = androidx.compose.ui.unit.TextUnit.Unspecified),
                 color = IdentiaTheme.colors.textMutedAlt,
                 textAlign = TextAlign.Center,

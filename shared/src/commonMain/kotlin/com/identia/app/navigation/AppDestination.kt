@@ -11,7 +11,6 @@ import kotlinx.serialization.Serializable
 
 // Bottom-nav tab pages (show the bottom bar)
 @Serializable object HomeRoute
-@Serializable object ProfileRoute
 @Serializable object LogsRoute
 
 // Reached from Home grid (full screen, back chevron)
@@ -35,5 +34,4 @@ enum class Tab(val label: String) {
     Verify("Verify"),
     Face("Face"),
     Logs("Logs"),
-    Profile("Profile"),
 }
