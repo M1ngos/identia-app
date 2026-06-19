@@ -1,18 +1,24 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop (JVM).
+# Identia
 
-* [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+> **identIA** — a cross-platform identity-verification prototype built with Kotlin Multiplatform and Compose Multiplatform.
 
-* [/shared](./shared/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./shared/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./shared/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./shared/src/jvmMain/kotlin)
-    folder is the appropriate location.
+Identia is an **alpha prototype** of an identity-verification app that runs natively on **Android, iOS, and Desktop (JVM)** from a single shared Compose UI codebase. It walks a user through a PIN gate, document capture, selfie/liveness verification, and face authentication, plus a dashboard, an audit log, and settings — all driven by in-memory mock data.
 
-### Running the apps
+The screens were rebuilt from a **Claude Design handoff** (HTML/CSS/JS mockups under `docs/identia-handoff/`); nothing in the app talks to a real backend.
+
+## Status
+
+This is an **alpha demo**, not a shippable product:
+
+- **No backend / no real biometrics** — capture, liveness, and face matching are simulated UI flows with hardcoded sample values.
+- **PIN gate is hardcoded** — enter the demo access code **`123456`** to get past the entry screen.
+- Bottom-nav tabs: **Home · Verify · Face · Logs** (Settings is reached from Home).
+
+## Tech stack
+
+Kotlin Multiplatform · Compose Multiplatform · Material 3 · type-safe Navigation Compose · kotlinx.serialization. All UI lives in the shared `:shared` module; `:androidApp`, `:desktopApp`, and `iosApp/` are thin platform entry points. Versions are pinned in [`gradle/libs.versions.toml`](gradle/libs.versions.toml).
+
+## Running the apps
 
 Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
 
@@ -20,9 +26,9 @@ Use the run configurations provided by the run widget in your IDE's toolbar. You
 - Desktop app:
   - Hot reload: `./gradlew :desktopApp:hotRun --auto`
   - Standard run: `./gradlew :desktopApp:run`
-- iOS app: open the [/iosApp](./iosApp) directory in Xcode and run it from there.
+- iOS app: open the [`iosApp`](iosApp) directory in Xcode and run it from there.
 
-### Running tests
+## Running tests
 
 Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
 
@@ -32,4 +38,4 @@ Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html) and [Compose Multiplatform](https://www.jetbrains.com/compose-multiplatform/).
