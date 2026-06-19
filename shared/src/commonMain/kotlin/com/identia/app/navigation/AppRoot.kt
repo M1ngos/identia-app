@@ -1,5 +1,6 @@
 package com.identia.app.navigation
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -27,11 +28,14 @@ import com.identia.app.feature.verify.LivenessScreen
 import com.identia.app.feature.verify.SelfieScreen
 import com.identia.app.feature.verify.VerifyResultScreen
 import com.identia.app.feature.verify.VerifyStartScreen
+import com.identia.app.state.LocalDemoState
+import com.identia.app.ui.components.AlphaStrip
 import com.identia.app.ui.components.BottomNav
 
 @Composable
 fun AppRoot() {
     val nav = rememberNavController()
+    val demo = LocalDemoState.current
     val backStackEntry by nav.currentBackStackEntryAsState()
     val dest = backStackEntry?.destination
 
@@ -42,6 +46,13 @@ fun AppRoot() {
         else -> null
     }
     val showBottomBar = selectedTab != null
+
+    fun logout() {
+        demo.logOut()
+        nav.navigate(AuthRoute) {
+            popUpTo(nav.graph.id) { inclusive = true }
+        }
+    }
 
     fun switchTab(tab: Tab) {
         val route: Any = when (tab) {
@@ -71,11 +82,16 @@ fun AppRoot() {
         } else {
             Modifier.fillMaxSize()
         }
-        NavHost(
-            navController = nav,
-            startDestination = AuthRoute,
-            modifier = contentModifier,
-        ) {
+        Column(modifier = contentModifier) {
+            // Persistent alpha strip on the authenticated tab screens.
+            if (showBottomBar) {
+                AlphaStrip()
+            }
+            NavHost(
+                navController = nav,
+                startDestination = AuthRoute,
+                modifier = Modifier.fillMaxSize(),
+            ) {
             composable<AuthRoute> {
                 AuthEntryScreen(onEnter = {
                     nav.navigate(HomeRoute) {
@@ -91,9 +107,11 @@ fun AppRoot() {
                     onSettings = { nav.navigate(SettingsRoute) },
                 )
             }
-            composable<ProfileRoute> { ProfileScreen() }
+            composable<ProfileRoute> { ProfileScreen(onLogout = ::logout) }
             composable<LogsRoute> { LogsScreen() }
-            composable<SettingsRoute> { SettingsScreen(onBack = { nav.popBackStack() }) }
+            composable<SettingsRoute> {
+                SettingsScreen(onBack = { nav.popBackStack() }, onLogout = ::logout)
+            }
 
             // Identity-verification sub-flow
             composable<VerifyStartRoute> {
@@ -167,6 +185,7 @@ fun AppRoot() {
                         nav.navigate(HomeRoute) { popUpTo<HomeRoute> { inclusive = true } }
                     },
                 )
+            }
             }
         }
     }

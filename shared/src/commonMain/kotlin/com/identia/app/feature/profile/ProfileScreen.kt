@@ -28,13 +28,14 @@ import com.identia.app.core.theme.Success
 import com.identia.app.state.LocalDemoState
 import com.identia.app.state.RecentCheck
 import com.identia.app.ui.components.CheckIcon
+import com.identia.app.ui.components.DangerButton
 import com.identia.app.ui.components.ScreenScaffold
 import com.identia.app.ui.components.SectionLabel
 import com.identia.app.ui.components.StatCard
 import com.identia.app.ui.components.glow
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(onLogout: () -> Unit) {
     val demo = LocalDemoState.current
     ScreenScaffold {
         Column(
@@ -77,6 +78,10 @@ fun ProfileScreen() {
             demo.recentChecks.forEachIndexed { index, check ->
                 if (index > 0) Spacer(Modifier.height(9.dp))
                 RecentCheckRow(check)
+            }
+            Spacer(Modifier.height(18.dp))
+            DangerButton("Log Out", onClick = onLogout) {
+                Box(Modifier.size(13.dp).clip(CircleShape).border(2.dp, IdentiaTheme.colors.errorSoft, CircleShape))
             }
         }
     }

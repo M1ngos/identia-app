@@ -35,9 +35,22 @@ class DemoState {
     val initials = "AM"
     val trustScore = 98
 
+    /** Whether the user has cleared the 6-digit code gate. */
+    var isAuthenticated by mutableStateOf(false)
+
     var darkMode by mutableStateOf(true)
     var biometricUnlock by mutableStateOf(true)
     var simulateFailure by mutableStateOf(false)
+
+    /** Clear the session — called from the Log Out action. */
+    fun logOut() {
+        isAuthenticated = false
+    }
+
+    companion object {
+        /** Demo-only access code. Alpha build: the only way in. */
+        const val DEMO_ACCESS_CODE = "123456"
+    }
 
     val recentChecks = listOf(
         RecentCheck("Face Authentication", "Today · 99.2%", ok = true),

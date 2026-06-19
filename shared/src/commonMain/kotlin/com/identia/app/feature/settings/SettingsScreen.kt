@@ -35,7 +35,7 @@ import com.identia.app.ui.components.TopBarWithBack
 import com.identia.app.ui.components.pulse
 
 @Composable
-fun SettingsScreen(onBack: () -> Unit) {
+fun SettingsScreen(onBack: () -> Unit, onLogout: () -> Unit) {
     val demo = LocalDemoState.current
     ScreenScaffold {
         TopBarWithBack("Settings", onBack)
@@ -86,6 +86,20 @@ fun SettingsScreen(onBack: () -> Unit) {
                 demo.biometricUnlock = true
                 demo.darkMode = true
             }) {
+                Box(Modifier.size(13.dp).clip(CircleShape).border(2.dp, IdentiaTheme.colors.errorSoft, CircleShape))
+            }
+            Spacer(Modifier.height(18.dp))
+            SectionLabel("Session")
+            Spacer(Modifier.height(9.dp))
+            IdentiaCard(Modifier.fillMaxWidth(), radius = 14) {
+                Column(Modifier.padding(14.dp)) {
+                    Text("Signed in as", style = IdentiaTheme.type.mono, color = IdentiaTheme.colors.textSecondaryAlt)
+                    Spacer(Modifier.height(2.dp))
+                    Text(demo.userEmail, style = IdentiaTheme.type.bodyStrong, color = IdentiaTheme.colors.textPrimary)
+                }
+            }
+            Spacer(Modifier.height(10.dp))
+            DangerButton("Log Out", onClick = onLogout) {
                 Box(Modifier.size(13.dp).clip(CircleShape).border(2.dp, IdentiaTheme.colors.errorSoft, CircleShape))
             }
             Spacer(Modifier.height(22.dp))
