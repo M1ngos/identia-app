@@ -38,13 +38,21 @@ kotlin {
     }
     
     sourceSets {
+        // Android + JVM desktop share the identical `ai.onnxruntime`-based actual
+        // (OnnxEngine.android.kt / OnnxEngine.jvm.kt). They differ only by which
+        // ONNX Runtime artifact supplies the runtime.
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
+            implementation(libs.onnxruntime.android)
+        }
+        jvmMain.dependencies {
+            implementation(libs.onnxruntime.jvm)
         }
         commonMain.dependencies {
             implementation(libs.compose.runtime)
             implementation(libs.compose.foundation)
             implementation(libs.compose.material3)
+            implementation(libs.material.icons.extended)
             implementation(libs.compose.ui)
             implementation(libs.compose.components.resources)
             implementation(libs.compose.uiToolingPreview)
@@ -52,6 +60,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.runtimeCompose)
             implementation(libs.navigation.compose)
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.kotlinx.coroutines.core)
             implementation(libs.ui)
         }
         commonTest.dependencies {
