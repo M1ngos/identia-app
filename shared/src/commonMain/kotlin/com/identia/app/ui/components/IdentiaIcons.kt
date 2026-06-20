@@ -61,6 +61,17 @@ fun ChevronLeftIcon(size: Dp, color: Color, strokeWidth: Dp = 2.dp) {
 }
 
 @Composable
+fun ChevronRightIcon(size: Dp, color: Color, strokeWidth: Dp = 2.dp) {
+    Canvas(Modifier.size(size)) {
+        val w = this.size.width
+        val h = this.size.height
+        val sw = strokeWidth.toPx()
+        drawLine(color, Offset(w * 0.4f, h * 0.22f), Offset(w * 0.66f, h * 0.5f), sw, StrokeCap.Round)
+        drawLine(color, Offset(w * 0.66f, h * 0.5f), Offset(w * 0.4f, h * 0.78f), sw, StrokeCap.Round)
+    }
+}
+
+@Composable
 fun RingGlyph(size: Dp, color: Color, strokeWidth: Dp = 2.dp) {
     Canvas(Modifier.size(size)) {
         val sw = strokeWidth.toPx()

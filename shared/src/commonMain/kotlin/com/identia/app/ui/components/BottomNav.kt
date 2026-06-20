@@ -10,21 +10,22 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Badge
+import androidx.compose.material.icons.outlined.Description
+import androidx.compose.material.icons.outlined.Face
+import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.identia.app.core.theme.Bg
@@ -89,15 +90,11 @@ private fun NavItem(tab: Tab, active: Boolean, onClick: () -> Unit) {
 
 @Composable
 private fun NavGlyph(tab: Tab, color: Color) {
-    when (tab) {
-        Tab.Home -> Box(Modifier.size(16.dp).border(2.dp, color, RoundedCornerShape(5.dp)))
-        Tab.Verify -> Box(Modifier.size(13.dp).rotate(45f).border(2.dp, color, RoundedCornerShape(3.dp)))
-        Tab.Face -> Box(Modifier.size(15.dp).border(2.dp, color, CircleShape))
-        Tab.Logs -> Column(
-            Modifier.width(15.dp),
-            verticalArrangement = Arrangement.spacedBy(2.5.dp),
-        ) {
-            repeat(3) { Box(Modifier.fillMaxWidth().height(2.dp).clip(RoundedCornerShape(2.dp)).background(color)) }
-        }
+    val vector = when (tab) {
+        Tab.Home -> Icons.Outlined.Home
+        Tab.Verify -> Icons.Outlined.Badge
+        Tab.Face -> Icons.Outlined.Face
+        Tab.Logs -> Icons.Outlined.Description
     }
+    Icon(vector, contentDescription = null, tint = color, modifier = Modifier.size(18.dp))
 }

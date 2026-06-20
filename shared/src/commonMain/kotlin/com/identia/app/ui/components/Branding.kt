@@ -14,6 +14,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Fingerprint
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -55,7 +58,12 @@ fun Logo(
                 .background(Gradients.purple),
             contentAlignment = Alignment.Center,
         ) {
-            RingGlyph(size = glyphSize, color = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.95f), strokeWidth = 2.5.dp)
+            Icon(
+                imageVector = Icons.Filled.Fingerprint,
+                contentDescription = "IdentIA logo",
+                tint = androidx.compose.ui.graphics.Color.White.copy(alpha = 0.95f),
+                modifier = Modifier.size(glyphSize),
+            )
         }
     }
 }

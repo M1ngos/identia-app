@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import com.identia.app.core.i18n.LocalStrings
 import com.identia.app.core.theme.Bg
 import com.identia.app.core.theme.CardInput
+import com.identia.app.core.theme.Gradients
 import com.identia.app.core.theme.IdentiaTheme
 import com.identia.app.state.DemoState
 import com.identia.app.state.LocalDemoState
@@ -124,7 +125,7 @@ fun AuthEntryScreen(onEnter: () -> Unit) {
             ) {
                 Logo(boxSize = 88.dp, radius = 26.dp, glyphSize = 40.dp, animatedRing = true)
                 Spacer(Modifier.height(26.dp))
-                Text("IdentIA", style = IdentiaTheme.type.brand, color = IdentiaTheme.colors.textPrimary)
+                Text("IdentIA", style = IdentiaTheme.type.brand.copy(brush = Gradients.purple))
                 Spacer(Modifier.height(8.dp))
                 Text(
                     strings.tagline,

@@ -24,9 +24,8 @@ data class AuditEntry(
  * which verification result screen the Liveness step navigates to).
  */
 class DemoState {
-    val userName = "Alex Mercer"
-    val userEmail = "alex.mercer@identia.io"
-    val initials = "AM"
+    val userName = "eau7829"
+    val userEmail = "early-adopter@proton.me"
     val trustScore = 98
 
     /** Whether the user has cleared the 6-digit code gate. */
