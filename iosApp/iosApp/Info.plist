@@ -4,5 +4,9 @@
 <dict>
 	<key>CADisableMinimumFrameDurationOnPhone</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera access is required to scan your ID document and verify your identity.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Photo library access is required to save captured ID images.</string>
 </dict>
 </plist>

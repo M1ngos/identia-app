@@ -7,6 +7,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.identia.app.core.i18n.Language
+import com.identia.app.ml.ExtractedField
 
 /** A single audit-log entry. */
 data class AuditEntry(
@@ -37,6 +38,23 @@ class DemoState {
 
     /** Selected interface language; drives the strings provided via LocalStrings. */
     var language by mutableStateOf(Language.English)
+
+    /**
+     * Text fields read off the ID during capture (OCR over the YOLO-detected
+     * boxes). Accumulated across the front and back captures; the latest read of a
+     * given field wins. Empty where OCR is unavailable (iOS/desktop).
+     */
+    var idFields by mutableStateOf<List<ExtractedField>>(emptyList())
+        private set
+
+    /** Merge a capture's OCR results in, replacing any prior value for the same field. */
+    fun recordIdFields(fields: List<ExtractedField>) {
+        if (fields.isEmpty()) return
+        val byLabel = LinkedHashMap<String, ExtractedField>()
+        idFields.forEach { byLabel[it.label] = it }
+        fields.forEach { byLabel[it.label] = it }
+        idFields = byLabel.values.toList()
+    }
 
     /** Clear the session — called from the Log Out action. */
     fun logOut() {

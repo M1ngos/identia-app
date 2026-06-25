@@ -58,6 +58,8 @@ interface Strings {
     val scanIdFront: String
     val scanIdBack: String
     val alignFrontOfId: String
+    val noCameraDetected: String
+    val idNotDetected: String
     val front: String
     val back: String
 
@@ -169,6 +171,8 @@ object En : Strings {
     override val scanIdFront = "Scan ID — Front"
     override val scanIdBack = "Scan ID — Back"
     override val alignFrontOfId = "Align front of ID within frame"
+    override val noCameraDetected = "No camera detected"
+    override val idNotDetected = "Couldn't detect the ID — hold steady and try again"
     override val front = "Front"
     override val back = "Back"
 
@@ -274,6 +278,8 @@ object Pt : Strings {
     override val scanIdFront = "Digitalizar ID — Frente"
     override val scanIdBack = "Digitalizar ID — Verso"
     override val alignFrontOfId = "Alinhe a frente do documento no quadro"
+    override val noCameraDetected = "Nenhuma câmera detectada"
+    override val idNotDetected = "Não foi possível detectar o documento — segure firme e tente novamente"
     override val front = "Frente"
     override val back = "Verso"
 

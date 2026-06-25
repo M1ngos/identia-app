@@ -121,6 +121,7 @@ fun AppRoot() {
                 CaptureIdScreen(
                     front = route.front,
                     onBack = { nav.popBackStack() },
+                    onExtracted = { demo.recordIdFields(it) },
                     onCapture = {
                         if (route.front) {
                             nav.navigate(CaptureRoute(front = false))

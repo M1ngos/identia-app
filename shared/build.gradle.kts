@@ -44,6 +44,8 @@ kotlin {
         androidMain.dependencies {
             implementation(libs.compose.uiToolingPreview)
             implementation(libs.onnxruntime.android)
+            // On-device OCR for detected ID fields (bundled Latin model).
+            implementation(libs.mlkit.text.recognition)
         }
         jvmMain.dependencies {
             implementation(libs.onnxruntime.jvm)
@@ -61,10 +63,12 @@ kotlin {
             implementation(libs.navigation.compose)
             implementation(libs.kotlinx.serialization.json)
             implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.camerak)
             implementation(libs.ui)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.kotlinx.coroutines.test)
         }
     }
 }
